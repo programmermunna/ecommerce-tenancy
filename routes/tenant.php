@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Tenant\AuthController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,13 @@ Route::middleware(['web',
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
+
+    Route::post('register',[AuthController::class,'register']);
+    Route::post('login',[AuthController::class,'login']);
+
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::get('user',[AuthController::class,'user']);
+        Route::delete('logout',[AuthController::class,'logout']);
+    });
+
 });

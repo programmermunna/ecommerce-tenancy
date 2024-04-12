@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\AuthController;
+use App\Http\Controllers\Tenant\ProductController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+
 
 
 /*
@@ -34,6 +36,13 @@ Route::middleware(['web',
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('user',[AuthController::class,'user']);
         Route::delete('logout',[AuthController::class,'logout']);
+
+        //products
+        Route::get('products/{id?}',[ProductController::class,'index']);
+        Route::post('products',[ProductController::class,'store']);
+        Route::post('products/{id?}',[ProductController::class,'Update']);
+        Route::get('product/{id}',[ProductController::class,'Destroy']);
+
     });
 
 });

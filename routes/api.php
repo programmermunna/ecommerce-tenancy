@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PlanController;
+use App\Http\Controllers\Api\TenantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +28,7 @@ Route::post('login',[AuthController::class,'login']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('user',[AuthController::class,'user']);
     Route::delete('logout',[AuthController::class,'logout']);
+
+    //tenants
+    Route::post('plans',[PlanController::class,'Store']);
 });

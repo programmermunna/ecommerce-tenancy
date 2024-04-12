@@ -32,12 +32,7 @@ class PlanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(PlanStoreRequest $request)
-    {
-        // $url = env("APP_URL");
-        // preg_match('/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/i', $url, $matches);
-        // $domain_path = isset($matches[1]) ? $matches[1] : '';
-
-
+    {   
         $user_id = Auth::user()->id;
         $plan = $request->plan;
         $company = $request->company;
@@ -56,7 +51,8 @@ class PlanController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            "tentent_id" => $tenant->id,
+            'message' => 'Successfully Created Tenant Plan!',
+            "tenant_id" => $tenant->id,
             'data' => $plan
         ]);
     }
